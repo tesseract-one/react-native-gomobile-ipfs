@@ -231,7 +231,7 @@ public class GomobileIpfsModule extends ReactContextBaseJavaModule {
     public void requestBuilderSend(String ptr, Promise promise) {
         tryReact(promise, () -> {
             RequestBuilder builder = this.getUnretainedObject(ptr);
-            return Base64.encode(builder.send(), Base64.DEFAULT);
+            return Base64.encodeToString(builder.send(), Base64.DEFAULT);
         });
     }
 
