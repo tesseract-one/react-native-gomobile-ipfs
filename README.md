@@ -6,6 +6,16 @@ React Native bindings for [ipfs-shipyard/gomobile-ipfs](https://github.com/ipfs-
 
 `$ yarn add react-native-gomobile-ipfs`
 
+### Android
+
+Add gomobile-ipfs maven repository to your `android/build.gradle` repositories section
+
+```groovy
+maven {
+  url 'https://dl.bintray.com/berty/gomobile-ipfs-android'
+}
+```
+
 ## Usage
 ```javascript
 // Import library
