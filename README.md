@@ -14,6 +14,9 @@ import {IPFS} from 'react-native-gomobile-ipfs';
 // Create instance of IPFS. Use one instance per app.
 const ipfs = await IPFS.create();
 
+// Start IPFS instance. It will connect to the network.
+await ipfs.start();
+
 // Create IPFS request. Check IPFS HTTP API docs.
 var req = await ipfs.newRequest('cat');
 
