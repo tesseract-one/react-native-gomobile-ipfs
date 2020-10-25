@@ -1,7 +1,3 @@
-import base64 from 'base-64';
-
-export { base64 }
-
 export enum RequestOption {
   Bool = 'b',
   String = 's',
@@ -16,12 +12,13 @@ export enum RequestBody {
 export class RequestBuilder {
   public withArgument(argument: String): Promise<RequestBuilder>;
   public withOption(option: String, type: RequestOption.Bool, value: boolean): Promise<RequestBuilder>;
-  public withOption(option: String, type: RequestOption.Bytes, value: string): Promise<RequestBuilder>;
+  public withOption(option: String, type: RequestOption.Bytes, value: Uint8Array): Promise<RequestBuilder>;
   public withOption(option: String, type: RequestOption.String, value: string): Promise<RequestBuilder>;
-  public withBody(type: RequestBody, value: string): Promise<RequestBuilder>;
+  public withBody(type: RequestBody.String, value: string): Promise<RequestBuilder>;
+  public withBody(type: RequestBody.Bytes, value: Uint8Array): Promise<RequestBuilder>;
   public withHeader(header: string, value: string): Promise<RequestBuilder>;
 
-  public send(): Promise<string>;
+  public send(): Promise<Uint8Array>;
   public sendToDict(): Promise<Record<string, any>>;
   
   public free(): Promise<void>;

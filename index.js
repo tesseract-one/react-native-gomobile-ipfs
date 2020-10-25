@@ -1,7 +1,5 @@
 import { NativeModules } from 'react-native';
-import base64 from "base-64";
-
-export { base64 };
+import * as base64 from "base64-js";
 
 const { GomobileIpfs } = NativeModules;
 
@@ -32,7 +30,7 @@ export class RequestBuilder {
 
   async withOption(option, type, value) {
     if (type === RequestOption.Bytes) {
-      value = base64.encode(value);
+      value = base64.fromByteArray(value);
     }
     const ptr = await GomobileIpfs.requestBuilderWithOption(this._ptr, option, type, value);
     this._ptr = null;
@@ -41,7 +39,7 @@ export class RequestBuilder {
 
   async withBody(type, body) {
     if (type === RequestBody.Bytes) {
-      body = base64.encode(body);
+      body = base64.fromByteArray(body);
     }
     const ptr = await GomobileIpfs.requestBuilderWithBody(this._ptr, type, body);
     this._ptr = null;
@@ -56,7 +54,7 @@ export class RequestBuilder {
 
   async send() {
     const res = await GomobileIpfs.requestBuilderSend(this._ptr);
-    return base64.decode(res);
+    return base64.toByteArray(res);
   }
 
   sendToDict() {
